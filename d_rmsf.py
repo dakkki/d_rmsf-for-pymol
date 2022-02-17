@@ -1,5 +1,8 @@
 import sys
 
+def clean_pdb(refpdb):
+    os.system("grep ATOM "+refpdb+">mpdb.pdb")
+
 def get_d_rmsf(wtdata,mutdata):
     d_rmsf_list = []
     with open(wtdata,'r') as data_wt:
@@ -35,6 +38,8 @@ def main(arglist):
 	mutdata= arglist[1]
 	refpdb = arglist[2]
 	outpdb = arglist[3]
+    clean_pdb(refpdb,mpdb)
+    mpdb="mpdb.pdb"
 	d_rmsf_list = get_d_rmsf(wtdata,mutdata)
 	write2pdb(d_rmsf_list,refpdb,outpdb)
 
